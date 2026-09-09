@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShoppingMall</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        main { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
+        .main-banner { background: linear-gradient(135deg, #74c0fc, #228be6); color: white; padding: 60px; border-radius: 8px; margin-bottom: 40px; text-align: center; }
+        .section-title { font-size: 22px; margin-bottom: 20px; border-left: 4px solid #228be6; padding-left: 10px; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+        .product-card { background-color: #fff; border: 1px solid #e9ecef; border-radius: 8px; overflow: hidden; }
+        .product-img { width: 100%; height: 200px; background-color: #e9ecef; display: flex; justify-content: center; align-items: center; color: #aaa; }
+        .product-info { padding: 15px; }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <a href="login.html">ログイン</a>
+        <a href="register.html">会員登録</a>
+        <a href="mypage.html">マイページ</a>
+        <a href="customer.html">カスタマーセンター</a>
+    </div>
+
+    <header>
+        <div class="logo"><a href="index.html">SHOPPINGMALL</a></div>
+        <div style="display: flex; width: 400px;">
+            <input type="text" class="form-control" style="border-radius: 4px 0   4px;" placeholder="キーワードを入力してください">
+            <button class="btn-primary" style="padding: 0 30px; border-radius: 0 4px 4px 0;">検索</button>
+        </div>
+        <div><a href="cart.html">カート (0)</a></div>
+    </header>
+
+    <nav>
+        <ul class="category-list">
+            <li class="category-item">全カテゴリ</li>
+            <li class="category-item">トップス</li>
+            <li class="category-item">家電・スマホ</li>
+            <li class="category-item">コスメ</li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="main-banner">
+            <h2>サマーセール開催中！</h2>
+            <p>新規会員登録で10%OFFクーポンプレゼント</p>
+        </div>
+
+        <h3 class="section-title">おすすめ商品</h3>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-img">PRODUCT</div>
+               	 	<div class="product-info">
+                <h4>リネンシャツ</h4>
+                		<p style="color:#e03131; font-weight:bold;">2,980円</p>
+                </div>
+            </div>
+        </div>
+    </main>
+	<footer>
+        <div class="footer-container">
+            <div>
+                <h3>ShoppingMall 株式会社</h3>
+                <p>東京都墨田区 / 代表者: 尹美晶</p>
+            </div>
+            <div class="footer-cs">
+                <h3>カスタマーサポート</h3>
+                <div class="tel">0120-000-000</div>
+                <p>受付時間: 平日 09:00 ~ 18:00</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

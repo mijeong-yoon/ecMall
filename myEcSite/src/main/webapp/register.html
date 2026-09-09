@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyCozySite - 회원가입</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 0;
+        }
+        .register-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 480px;
+        }
+        .title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #495057;
+        }
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            outline: none;
+            font-size: 14px;
+        }
+        .form-control:focus {
+            border-color: #228be6;
+        }
+        .register-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #228be6;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .register-btn:hover {
+            background-color: #1c7ed6;
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        .login-link a {
+            text-decoration: none;
+            color: #228be6;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="register-container">
+        <div class="title">会員登録</div>
+        
+        <form id="registerForm" onsubmit="return validateRegister()">
+            <div class="form-group">
+                <label for="regId">ID</label>
+                <input type="text" id="regId" class="form-control" placeholder="英語数字4~12">
+            </div>
+            
+            <div class="form-group">
+                <label for="regPw">パスワード</label>
+                <input type="password" id="regPw" class="form-control" placeholder="パスワードを入力してください">
+            </div>
+            
+            <div class="form-group">
+                <label for="regPwConfirm">パスワード確認</label>
+                <input type="password" id="regPwConfirm" class="form-control" placeholder="パスワードをもう一度入力してください">
+            </div>
+            
+            <div class="form-group">
+                <label for="regName">お名前</label>
+                <input type="text" id="regName" class="form-control" placeholder="お名前を入力してください">
+            </div>
+            
+            <div class="form-group">
+                <label for="regEmail">e-mail</label>
+                <input type="email" id="regEmail" class="form-control" placeholder="example@email.com">
+            </div>
+            
+            <button type="submit" class="register-btn">加入</button>
+        </form>
+        
+        <div class="login-link">
+            既にアカウントをお持ちでしょうか? <a href="login.html">ログインする</a>
+        </div>
+    </div>
+
+    <script>
+        function validateRegister() {
+            const id = document.getElementById('regId').value.trim();
+            const pw = document.getElementById('regPw').value.trim();
+            const pwConfirm = document.getElementById('regPwConfirm').value.trim();
+            const name = document.getElementById('regName').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+
+            if (id.length < 4 || id.length > 12) {
+                alert('아이디는 4자 이상 12자 이하로 입력해 주세요.');
+                return false;
+            }
+            if (!pw) {
+                alert('비밀번호를 입력해 주세요.');
+                return false;
+            }
+            if (pw !== pwConfirm) {
+                alert('비밀번호가 일치하지 않습니다.');
+                return false;
+            }
+            if (!name) {
+                alert('이름을 입력해 주세요.');
+                return false;
+            }
+            if (!email) {
+                alert('이메일을 입력해 주세요.');
+                return false;
+            }
+
+            alert('회원가입이 완료되었습니다! (서버 연동 필요)');
+            // 실제 웹서버 연동 시에는 여기서 기존 index.html 등으로 이동하게 합니다.
+            location.href = "login.html"; 
+            return false; // 폼 제출 기본 동작을 막고 페이지 이동을 제어하기 위함
+        }
+    </script>
+</body>
+</html>

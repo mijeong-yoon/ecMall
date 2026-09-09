@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>カート & お気に入り - ShoppingMall</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        main { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
+        
+        /* 상단 탭 스타일 */
+        .tabs { display: flex; border-bottom: 2px solid #e9ecef; margin-bottom: 20px; }
+        .tab-button { padding: 15px 30px; border: none; background: none; font-size: 16px; font-weight: bold; cursor: pointer; color: #868e96; }
+        .tab-button.active { color: #228be6; border-bottom: 2px solid #228be6; margin-bottom: -2px; }
+        
+        .control-panel { display: flex; justify-content: space-between; align-items: center; background: #fff; padding: 15px 20px; border: 1px solid #e9ecef; border-bottom: none; border-radius: 8px 8px 0 0; font-size: 14px; }
+        .cart-table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #e9ecef; border-radius: 0 0 8px 8px; overflow: hidden; font-size: 14px; }
+        .cart-table th, .cart-table td { padding: 15px; border-bottom: 1px solid #e9ecef; text-align: center; }
+        .cart-table th { background: #f8f9fa; font-weight: 600; }
+        
+        .product-info-cell { display: flex; align-items: center; text-align: left; gap: 15px; }
+        .prod-mini-img { width: 60px; height: 60px; background: #e9ecef; display:flex; justify-content:center; align-items:center; font-size:10px; color:#aaa; border-radius:4px; }
+        
+        .btn-sm { padding: 5px 10px; font-size: 12px; background-color: #f1f3f5; color: #495057; border: 1px solid #ced4da; border-radius: 4px; cursor: pointer; }
+        .btn-sm:hover { background-color: #e9ecef; }
+        
+        /* 하단 금액 정산 바 */
+        .order-summary { background: #fff; border: 1px solid #e9ecef; border-radius: 8px; padding: 20px; margin-top: 30px; display: flex; justify-content: space-between; align-items: center; }
+    </style>
+</head>
+<body>
+
+    <div id="header-include"></div>
+
+    <main>
+        <div class="tabs">
+            <button class="tab-button active">ショッピングカート</button>
+            <button class="tab-button">お気に入り箱</button>
+        </div>
+
+        <div class="control-panel">
+            <label style="cursor: pointer;">
+                <input type="checkbox" id="selectAll" onclick="toggleSelectAll(this)" checked> <strong>全てを選択</strong>
+            </label>
+            <button class="btn-sm" style="background-color: #ffe3e3; color: #e03131; border-color: #ffa8a8;" onclick="clearCart()">カートを空にする</button>
+        </div>
+
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th style="width: 50px;">選択</th>
+                    <th>商品情報</th>
+                    <th style="width: 120px;">価格</th>
+                    <th style="width: 100px;">数量</th>
+                    <th style="width: 100px;">管理</th>
+                </tr>
+            </thead>
+            <tbody id="cart-items">
+                <tr class="cart-row">
+                    <td><input type="checkbox" class="item-check" checked></td>
+                    <td>
+                        <div class="product-info-cell">
+                            <div class="prod-mini-img">IMAGE</div>
+                            <div>
+                                <strong>涼しいシャツ</strong>
+                                <p style="font-size: 12px; color:#868e96; margin-top:3px;">オプション: ホワイト / L</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="font-weight: bold;">2,990円</td>
+                    <td>1</td>
+                    <td><button class="btn-sm" onclick="deleteRow(this)">削除</button></td>
+                </tr>
+                <tr class="cart-row">
+                    <td><input type="checkbox" class="item-check" checked></td>
+                    <td>
+                        <div class="product-info-cell">
+                            <div class="prod-mini-img">IMAGE</div>
+                            <div>
+                                <strong>無線ノイズキャンセリングイヤホン v2</strong>
+                                <p style="font-size: 12px; color:#868e96; margin-top:3px;">オプション: ブラック</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="font-weight: bold;">8,900円</td>
+                    <td>1</td>
+                    <td><button class="btn-sm" onclick="deleteRow(this)">削除</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="order-summary" id="summary-panel">
+            <div style="font-size: 16px;">
+                注文合計金額: <span style="font-size: 22px; font-weight: bold; color: #e03131;">11,890円</span>
+            </div>
+            <button class="btn-primary" style="padding: 15px 40px; font-size: 16px;" onclick="alert('注文手続きへ進みます。')">注文手続きへ進む</button>
+        </div>
+    </main>
+
+    <div id="footer-include"></div>
+
+    <script>
+        // 1. 全てを選択 (전체 선택 기능)
+        function toggleSelectAll(master) {
+            const checkboxes = document.querySelectorAll('.item-check');
+            checkboxes.forEach(cb => cb.checked = master.checked);
+        }
+
+        // 2. 個別削除 (개별 행 삭제 기능)
+        function deleteRow(btn) {
+            if(confirm("この商品を削除しますか？")) {
+                const row = btn.closest('tr');
+                row.remove();
+                checkEmpty();
+            }
+        }
+
+        // 3. 全てを捨てる (장바구니 전체 비우기 기능)
+        function clearCart() {
+            if(confirm("カート内のすべての商品を削除しますか？")) {
+                document.getElementById('cart-items').innerHTML = '';
+                checkEmpty();
+            }
+        }
+
+        // 장바구니가 비었을 때의 UI 처리
+        function checkEmpty() {
+            const rows = document.querySelectorAll('.cart-row');
+            if(rows.length === 0) {
+                document.getElementById('cart-items').innerHTML = `
+                    <tr>
+                        <td colspan="5" style="padding: 50px 0; color: #868e96; font-size: 16px;">
+                            カートに商品が入っていません。
+                        </td>
+                    </tr>`;
+                document.getElementById('summary-panel').style.display = 'none';
+                document.getElementById('selectAll').checked = false;
+            }
+        }
+
+        // 인클루드 스크립트
+        function loadInclude(elementId, url) {
+            fetch(url).then(res => res.text()).then(data => { document.getElementById(elementId).innerHTML = data; });
+        }
+        window.addEventListener('DOMContentLoaded', () => {
+            loadInclude('header-include', 'include/header.html');
+            loadInclude('footer-include', 'include/footer.html');
+        });
+    </script>
+</body>
+</html>

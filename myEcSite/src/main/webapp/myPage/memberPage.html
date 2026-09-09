@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>マイページ - ShoppingMall</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        main { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
+        .mypage-grid { display: grid; grid-template-columns: 250px 1fr; gap: 30px; }
+        .sidebar { background: #fff; padding: 20px; border-radius: 8px; border: 1px solid #e9ecef; height: fit-content; }
+        .sidebar h3 { font-size: 18px; margin-bottom: 15px; border-bottom: 2px solid #228be6; padding-bottom: 8px; }
+        .sidebar ul { list-style: none; }
+        .sidebar ul li { padding: 12px 0; border-bottom: 1px solid #f1f3f5; font-size: 14px; }
+        .sidebar ul li a:hover { color: #228be6; font-weight: bold; }
+        
+        .content-box { background: #fff; padding: 30px; border-radius: 8px; border: 1px solid #e9ecef; margin-bottom: 25px; }
+        .content-title { font-size: 18px; font-weight: bold; margin-bottom: 20px; border-left: 4px solid #228be6; padding-left: 10px; }
+        
+        /* 등급 세션 */
+        .rank-badge { display: inline-block; background: #linear-gradient(135deg, #fcc419, #fab005); color: #fff; padding: 3px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; margin-left: 10px; }
+        
+        /* 쿠폰 및 주문 테이블 */
+        .mp-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
+        .mp-table th, .mp-table td { padding: 12px; border: 1px solid #e9ecef; text-align: center; }
+        .mp-table th { background: #f8f9fa; font-weight: 600; }
+        .status-shipping { color: #228be6; font-weight: bold; }
+        
+        .coupon-card { display: flex; justify-content: space-between; align-items: center; background: #fff4e6; border: 1px dashed #ff922b; padding: 15px 20px; border-radius: 6px; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+
+    <div id="header-include"></div>
+
+    <main>
+        <div class="mypage-grid">
+            <aside class="sidebar">
+                <h3>マイページメニュー</h3>
+                <ul>
+                    <li><a href="#info">会員情報照会</a></li>
+                    <li><a href="#coupon">クーポン発行</a></li>
+                    <li><a href="#order">注文・配送照会</a></li>
+                </ul>
+            </aside>
+
+            <div class="main-content">
+                
+                <section id="info" class="content-box">
+                    <div class="content-title">会員情報照会</div>
+                    <p style="font-size: 16px; line-height: 2;">
+                        <strong>山田 太郎</strong> 様のログインID: <span style="color:#666;">test_user</span>
+                        <span class="rank-badge" style="background:#be4bdb;">VIP 会員</span>
+                    </p>
+                    <p style="font-size: 13px; color:#868e96; margin-top: 5px;">★ VIP 特典: 毎月全商品 5% ポイント還元 & 送料無料</p>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-include"></div>
+
+    <script>
+        function loadInclude(elementId, url) {
+            fetch(url).then(res => res.text()).then(data => { document.getElementById(elementId).innerHTML = data; });
+        }
+        window.addEventListener('DOMContentLoaded', () => {
+            loadInclude('header-include', 'include/header.html');
+            loadInclude('footer-include', 'include/footer.html');
+        });
+    </script>
+</body>
+</html>

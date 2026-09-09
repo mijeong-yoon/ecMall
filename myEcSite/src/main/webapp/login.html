@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ログイン - ShoppingMall</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="auth-wrapper">
+        <div class="auth-container">
+            <div class="auth-title"><a href="index.html" style="color:#228be6;">SHOPPINGMALL</a></div>
+            
+            <form onsubmit="alert('ログイン試行'); return false;">
+                <div class="form-group">
+                    <label>ユーザーID</label>
+                    <input type="text" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>パスワード</label>
+                    <input type="password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; padding: 14px; font-size: 16px;">ログイン</button>
+            </form>
+            
+            <div style="display: flex; justify-content: space-between; margin-top: 20px; font-size: 13px; color: #666;">
+                <a href="#">ID・PWをお忘れの方</a>
+                <a href="register.html" style="color: #228be6; font-weight: bold;">新規会員登録</a>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-container">
+            <div>
+                <h3>ShoppingMall 株式会社</h3>
+                <p>東京都墨田区 / 代表者: 尹美晶 </p>
+            </div>
+            <div class="footer-cs">
+                <h3>カスタマーサポート</h3>
+                <div class="tel">0120-000-000</div>
+                <p>受付時間: 平日 09:00 ~ 18:00</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
